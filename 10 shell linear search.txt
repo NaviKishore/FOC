@@ -1,0 +1,15 @@
+#!/bin/bash
+array=("apple" "banana" "cherry" "date" "grape" "kiwi")
+read -p "Enter the element to search for: " target
+found=0
+for element in "${array[@]}"; do
+    if [ "$element" == "$target" ]; then
+        found=1
+        break
+    fi
+done
+if [ "$found" -eq 1 ]; then
+    echo "$target was found in the array."
+else
+    echo "$target was not found in the array."
+fi

@@ -1,0 +1,59 @@
+#!/bin/bash
+generate_arithmetic_series() {
+    local start=$1
+    local diff=$2
+    local n=$3
+    for ((i=0; i<n; i++)); do
+        echo -n "$((start + i * diff)) "
+    done
+    echo ""  # Print a newline
+}
+generate_geometric_series() {
+    local start=$1
+    local ratio=$2
+    local n=$3
+    for ((i=0; i<n; i++)); do
+        term=$((start * (ratio ** i)))
+        echo -n "$term "
+    done
+    echo ""  
+}
+generate_fibonacci_series() {
+    local n=$1
+    term1=0
+    term2=1
+    echo -n "$term1, $term2"
+    for ((i=3; i<=n; i++)); do
+        next_term=$((term1 + term2))
+        echo -n ", $next_term"
+        term1=$term2
+        term2=$next_term
+    done
+    echo ""  # Print a newline
+echo "Choose a number series:"
+echo "1. Arithmetic Series"
+echo "2. Geometric Series"
+echo "3. Fibonacci Series"
+read -p "Enter your choice (1/2/3): " choice
+
+case $choice in
+    1)
+        read -p "Enter the start of the arithmetic series: " start
+        read -p "Enter the common difference: " diff
+        read -p "Enter the number of terms: " n
+        generate_arithmetic_series $start $diff $n
+        ;;
+    2)
+        read -p "Enter the start of the geometric series: " start
+        read -p "Enter the common ratio: " ratio
+        read -p "Enter the number of terms: " n
+        generate_geometric_series $start $ratio $n
+        ;;
+    3)
+        read -p "Enter the number of terms in the Fibonacci series: " n
+        generate_fibonacci_series $n
+        ;;
+    *)
+        echo "Invalid choice"
+        ;;
+esac
